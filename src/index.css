@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", "Segoe UI", Tahoma, sans-serif;
+
+  --color-ivory: #f4eee0;
+  --color-cream: #fbf7ec;
+  --color-paper: #fffcf4;
+  --color-espresso: #20150c;
+  --color-ink: #2a1d11;
+  --color-bark: #5d4a35;
+  --color-fawn: #8d7a63;
+  --color-clay: #a34f26;
+  --color-clay-deep: #7d3a17;
+  --color-blush: #e9b98a;
+  --color-leaf: #47653e;
+  --color-leaf-deep: #35502d;
+  --color-wa: #1da851;
+  --color-line: #e2d7bf;
+  --color-linesoft: #ece3cf;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-clay);
+  color: var(--color-cream);
+}
+
+/* ---- grain / noise overlay ---- */
+.noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* line-mask heading reveal */
+.mask-line {
+  display: block;
+  overflow: hidden;
+}
+.mask-line > span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reveal.in .mask-line > span,
+.mask-line.in > span {
+  transform: translateY(0);
+}
+
+/* ---- slow ken burns on heritage image ---- */
+.kenburns {
+  animation: kb 26s ease-in-out infinite alternate;
+}
+@keyframes kb {
+  from {
+    transform: scale(1) translateY(0);
+  }
+  to {
+    transform: scale(1.08) translateY(-1.5%);
+  }
+}
+
+/* ---- whatsapp float pulse ---- */
+.wa-pulse {
+  animation: waPulse 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes waPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(29, 168, 81, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(29, 168, 81, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(29, 168, 81, 0);
+  }
+}
+
+/* ---- nav underline sweep ---- */
+.navlink {
+  position: relative;
+}
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 2px;
+  width: 100%;
+  background: var(--color-clay);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.navlink:hover::after,
+.navlink.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .mask-line > span {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .kenburns,
+  .wa-pulse {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
