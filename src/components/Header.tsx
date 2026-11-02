@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { CONTACT, WA_GENERAL } from "../data/products";
+import { pathForPage, type Page } from "../router";
 import { ClockIcon, CloseIcon, MenuIcon, Monogram, PhoneIcon, PinIcon, WhatsAppIcon } from "./Icons";
 
-export type Page = "home" | "products";
+export type { Page };
 
 type HeaderProps = {
   page: Page;
@@ -16,6 +17,16 @@ export default function Header({ page, onNavigate }: HeaderProps) {
     setOpen(false);
     onNavigate(p, anchor);
   };
+
+  /* let ctrl/cmd/middle click open a real new tab, otherwise route in-page */
+  const handle =
+    (p: Page, anchor?: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      go(p, anchor);
+    };
+
+  const href = (p: Page, anchor?: string) => `${pathForPage(p)}${anchor ? `#${anchor}` : ""}`;
 
   const linkClass = (active: boolean) =>
     `navlink text-sm font-semibold tracking-wide ${
@@ -55,8 +66,9 @@ export default function Header({ page, onNavigate }: HeaderProps) {
       {/* main bar */}
       <div className="bg-ivory/90 backdrop-blur-md border-b border-line">
         <div className="max-w-6xl mx-auto px-5 h-16 sm:h-[72px] flex items-center justify-between gap-4">
-          <button
-            onClick={() => go("home")}
+          <a
+            href={href("home")}
+            onClick={handle("home")}
             className="flex items-center gap-3 text-left group"
             aria-label="M.R Traders — home"
           >
@@ -71,18 +83,32 @@ export default function Header({ page, onNavigate }: HeaderProps) {
                 Wholesale Merchants · Est. 1987
               </span>
             </span>
-          </button>
+          </a>
 
           <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
-            <button onClick={() => go("home")} className={linkClass(page === "home")}>
+            <a
+              href={href("home")}
+              onClick={handle("home")}
+              aria-current={page === "home" ? "page" : undefined}
+              className={linkClass(page === "home")}
+            >
               Home
-            </button>
-            <button onClick={() => go("products")} className={linkClass(page === "products")}>
+            </a>
+            <a
+              href={href("products")}
+              onClick={handle("products")}
+              aria-current={page === "products" ? "page" : undefined}
+              className={linkClass(page === "products")}
+            >
               Products
-            </button>
-            <button onClick={() => go("home", "contact")} className="navlink text-sm font-semibold tracking-wide text-ink hover:text-clay">
+            </a>
+            <a
+              href={href("home", "contact")}
+              onClick={handle("home", "contact")}
+              className="navlink text-sm font-semibold tracking-wide text-ink hover:text-clay"
+            >
               Contact
-            </button>
+            </a>
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
@@ -111,24 +137,27 @@ export default function Header({ page, onNavigate }: HeaderProps) {
         {open && (
           <div className="md:hidden border-t border-line bg-cream">
             <div className="px-5 py-4 flex flex-col gap-1">
-              <button
-                onClick={() => go("home")}
+              <a
+                href={href("home")}
+                onClick={handle("home")}
                 className={`text-left py-2.5 font-display text-xl ${page === "home" ? "text-clay" : "text-ink"}`}
               >
                 Home
-              </button>
-              <button
-                onClick={() => go("products")}
+              </a>
+              <a
+                href={href("products")}
+                onClick={handle("products")}
                 className={`text-left py-2.5 font-display text-xl ${page === "products" ? "text-clay" : "text-ink"}`}
               >
                 Products
-              </button>
-              <button
-                onClick={() => go("home", "contact")}
+              </a>
+              <a
+                href={href("home", "contact")}
+                onClick={handle("home", "contact")}
                 className="text-left py-2.5 font-display text-xl text-ink"
               >
                 Contact
-              </button>
+              </a>
               <div className="mt-3 pt-3 border-t border-line flex flex-wrap gap-2.5">
                 <a
                   href={WA_GENERAL}

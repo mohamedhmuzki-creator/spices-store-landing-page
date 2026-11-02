@@ -56,13 +56,17 @@ export default function Products() {
               Wholesale list · Direct from farm
             </p>
             <h1 className="mt-5 font-display font-semibold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] tracking-tight text-espresso">
-              Nineteen lines,
-              <span className="block italic font-normal text-clay mt-1.5">straight from the farm.</span>
+              Our Complete Wholesale
+              <span className="block italic font-normal text-clay mt-1.5">
+                Spice &amp; Produce Catalog
+              </span>
             </h1>
             <p className="mt-5 text-bark leading-relaxed max-w-xl">
-              Every lot below is bought at the farm gate or the shop counter, graded by hand and
-              weighed in front of you. Rates move with the harvest — message us on WhatsApp for
-              today’s price before you load the truck.
+              All 19 wholesale lines we trade at our shop in Mawathagama, Kurunegala — from Ceylon
+              cinnamon, black pepper and cardamom to copra, paddy and rubber. Every lot is bought at
+              the farm gate or the shop counter, graded by hand and weighed in front of you. Rates
+              move with the harvest — message us on WhatsApp for today’s price before you load the
+              truck.
             </p>
           </Reveal>
 

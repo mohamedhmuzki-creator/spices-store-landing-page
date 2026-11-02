@@ -1,5 +1,6 @@
+import type { MouseEvent } from "react";
 import { CONTACT, PRODUCTS, WA_GENERAL, categoryLabel } from "../data/products";
-import type { Page } from "./Header";
+import { pathForPage, type Page } from "../router";
 import { ClockIcon, Monogram, WhatsAppIcon } from "./Icons";
 
 type FooterProps = {
@@ -7,6 +8,14 @@ type FooterProps = {
 };
 
 export default function Footer({ onNavigate }: FooterProps) {
+  /* let ctrl/cmd/middle click open a real new tab, otherwise route in-page */
+  const handle =
+    (p: Page, anchor?: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      onNavigate(p, anchor);
+    };
+
   return (
     <footer className="bg-espresso text-cream/80">
       <div className="max-w-6xl mx-auto px-5 pt-14 pb-8">
@@ -25,9 +34,9 @@ export default function Footer({ onNavigate }: FooterProps) {
               </div>
             </div>
             <p className="mt-5 text-sm leading-relaxed text-cream/60 max-w-xs">
-              Family-run wholesale trade house on Kandy Road, Mawathagama. Founded by
-              M.&nbsp;R.&nbsp;M.&nbsp;Musthakeen, now trading in its second generation — bulk
-              supply and fair local buying, straight from the farm.
+              Family-run wholesale spice supplier in Mawathagama, Kurunegala District, Sri Lanka.
+              Founded by M.&nbsp;R.&nbsp;M.&nbsp;Musthakeen, now trading in its second generation —
+              bulk supply and fair local buying, straight from the farm.
             </p>
             <a
               href={WA_GENERAL}
@@ -44,24 +53,24 @@ export default function Footer({ onNavigate }: FooterProps) {
             <h3 className="text-[11px] font-bold tracking-[0.22em] uppercase text-blush">Explore</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <button onClick={() => onNavigate("home")} className="hover:text-cream transition-colors">
+                <a href={pathForPage("home")} onClick={handle("home")} className="hover:text-cream transition-colors">
                   Home
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate("products")} className="hover:text-cream transition-colors">
+                <a href={pathForPage("products")} onClick={handle("products")} className="hover:text-cream transition-colors">
                   All Products ({PRODUCTS.length})
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate("home", "contact")} className="hover:text-cream transition-colors">
+                <a href={`${pathForPage("home")}#contact`} onClick={handle("home", "contact")} className="hover:text-cream transition-colors">
                   Contact &amp; Directions
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate("home", "buying")} className="hover:text-cream transition-colors">
+                <a href={`${pathForPage("home")}#buying`} onClick={handle("home", "buying")} className="hover:text-cream transition-colors">
                   Sell Your Harvest to Us
-                </button>
+                </a>
               </li>
             </ul>
           </div>

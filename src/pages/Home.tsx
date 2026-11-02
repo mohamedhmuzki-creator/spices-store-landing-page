@@ -1,5 +1,6 @@
 import Reveal from "../components/Reveal";
 import ProductCard from "../components/ProductCard";
+import Process from "../components/Process";
 import {
   ArrowRightIcon,
   ArrowUpRightIcon,
@@ -21,7 +22,6 @@ import {
   WA_FARMER,
   WA_GENERAL,
   waLink,
-  categoryLabel,
   type Product,
 } from "../data/products";
 import type { Page } from "../components/Header";
@@ -71,16 +71,17 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
 
             <h1 className="mt-6 font-display font-semibold text-[2.6rem] leading-[1.05] sm:text-6xl lg:text-[4.2rem] tracking-tight text-cream">
-              Wholesale spices &amp; produce,
+              Connecting Sri Lankan Spice Farmers
               <span className="block italic font-normal text-blush mt-2">
-                straight from the farm.
+                with Global Bulk Buyers
               </span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg leading-relaxed text-cream/80 max-w-xl">
-              M.R Traders is a family wholesale counter on Kandy Road — supplying cinnamon,
-              pepper, cloves, nutmeg, copra, rubber and more in bulk across Sri Lanka, while
-              buying the harvest of local farmers at fair, on-the-spot rates.
+              M.R Traders is a family wholesale spice supplier in Mawathagama, Kurunegala —
+              selling Ceylon cinnamon, black pepper, cardamom, cloves, nutmeg, copra, rubber and
+              more in bulk across Sri Lanka, while buying the harvest of local farmers at fair,
+              on-the-spot rates.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -136,7 +137,7 @@ export default function Home({ onNavigate }: HomeProps) {
       <section className="border-b border-line bg-cream">
         <div className="max-w-6xl mx-auto px-5 grid grid-cols-2 lg:grid-cols-4">
           {[
-            { n: "1987", l: "Founded on Kandy Road", s: "by M. R. M. Musthakeen" },
+            { n: "1987", l: "Founded in Mawathagama", s: "by M. R. M. Musthakeen" },
             { n: "19", l: "Product lines traded", s: "Spices to rubber" },
             { n: "6", l: "Days open a week", s: "8.00 AM – 6.00 PM" },
             { n: "2nd", l: "Generation at the counter", s: "Mohamed Muzki, proprietor" },
@@ -163,8 +164,8 @@ export default function Home({ onNavigate }: HomeProps) {
             <Reveal>
               <Kicker>Our story — since 1987</Kicker>
               <h2 className="mt-5 font-display font-semibold text-3xl sm:text-4xl lg:text-[2.9rem] leading-[1.12] tracking-tight text-espresso">
-                <span className="mask-line"><span>A family business</span></span>
-                <span className="mask-line"><span className="italic text-clay">on Kandy Road.</span></span>
+                <span className="mask-line"><span>A family spice business</span></span>
+                <span className="mask-line"><span className="italic text-clay">in Mawathagama, Kurunegala.</span></span>
               </h2>
             </Reveal>
 
@@ -172,8 +173,9 @@ export default function Home({ onNavigate }: HomeProps) {
               <p className="mt-6 text-bark leading-relaxed">
                 M.R Traders was started in <strong className="text-ink">1987</strong> by{" "}
                 <strong className="text-ink">M.&nbsp;R.&nbsp;M.&nbsp;Musthakeen</strong> at 96, Kandy
-                Road, Mawathagama — buying spices and produce from local farmers and selling them in
-                bulk.
+                Road, <strong className="text-ink">Mawathagama</strong> in the Kurunegala District —
+                buying spices and produce from farmers across the North Western Province and selling
+                them in bulk.
               </p>
             </Reveal>
 
@@ -208,8 +210,8 @@ export default function Home({ onNavigate }: HomeProps) {
                   />
                 </div>
                 <figcaption className="bg-espresso text-cream/75 text-xs px-5 py-3 flex items-center justify-between gap-4">
-                  <span>The shop on Kandy Road — the same trade, the same address, since 1987.</span>
-                  <span className="font-display italic text-blush shrink-0">Mawathagama</span>
+                  <span>Our shop at 96, Kandy Road, Mawathagama — the same address since 1987.</span>
+                  <span className="font-display italic text-blush shrink-0">Kurunegala</span>
                 </figcaption>
               </figure>
             </Reveal>
@@ -328,15 +330,20 @@ export default function Home({ onNavigate }: HomeProps) {
                 This season at the counter.
               </h2>
             </div>
-            <button
-              onClick={() => onNavigate("products")}
+            <a
+              href="/products"
+              onClick={(e) => {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                e.preventDefault();
+                onNavigate("products");
+              }}
               className="group inline-flex items-center gap-2 text-sm font-extrabold text-clay hover:text-clay-deep"
             >
               View all 19 products
               <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-clay/40 group-hover:bg-clay group-hover:text-cream transition-colors duration-300">
                 <ArrowRightIcon className="w-4 h-4" />
               </span>
-            </button>
+            </a>
           </Reveal>
 
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -349,46 +356,61 @@ export default function Home({ onNavigate }: HomeProps) {
         </div>
       </section>
 
-      {/* ============ FULL LEDGER ============ */}
+      {/* ============ WHY CHOOSE US ============ */}
       <section className="pb-20 sm:pb-28">
         <div className="max-w-6xl mx-auto px-5">
           <Reveal className="max-w-2xl">
-            <Kicker>The trader’s ledger</Kicker>
+            <Kicker>Why choose us</Kicker>
             <h2 className="mt-5 font-display font-semibold text-3xl sm:text-4xl tracking-tight text-espresso">
-              Everything we buy &amp; sell.
+              Why buyers and farmers come to us.
             </h2>
             <p className="mt-4 text-bark leading-relaxed">
-              Nineteen lines across five families of produce. Tap any line to see grades, packing
-              and today’s rate.
+              We have traded from the same shop in Mawathagama, Kurunegala since 1987. The stock
+              comes straight from Sri Lankan farms, the weight is honest, and you can get a price on
+              WhatsApp the same day.
             </p>
           </Reveal>
 
-          <Reveal delay={120}>
-            <div className="mt-10 grid md:grid-cols-2 gap-x-12">
-              {PRODUCTS.map((p) => (
-                <button
-                  key={p.id}
-                  onClick={() => onNavigate("products")}
-                  className="group flex items-center gap-4 py-3.5 border-t border-line text-left hover:bg-cream/70 transition-colors duration-200 px-2 -mx-2"
-                >
-                  <span className="font-display italic text-fawn w-8 shrink-0">{p.no}</span>
-                  <span className="flex-1 min-w-0">
-                    <span className="block font-bold text-ink group-hover:text-clay transition-colors truncate">
-                      {p.name}
-                    </span>
-                    <span className="block text-[11px] font-semibold tracking-wider uppercase text-fawn">
-                      {categoryLabel(p.category)}
-                      {p.alt ? ` · ${p.alt}` : ""}
-                    </span>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <LeafIcon className="w-6 h-6" />,
+                title: "Direct from farms",
+                text: "We buy from local growers around Mawathagama, so the stock is fresh and not held in storage for months.",
+              },
+              {
+                icon: <ScaleIcon className="w-6 h-6" />,
+                title: "Honest weight & grading",
+                text: "Every lot is graded by hand and weighed in front of you, with the rate agreed before anything is loaded.",
+              },
+              {
+                icon: <SackIcon className="w-6 h-6" />,
+                title: "Bulk quantities",
+                text: "Sacks, bales and crates packed to your order — small trade loads or full bulk orders are both fine.",
+              },
+              {
+                icon: <WhatsAppIcon className="w-6 h-6" />,
+                title: "Easy to reach",
+                text: "Message us on WhatsApp for today's rate. Mohamed Muzki answers himself, usually within the hour.",
+              },
+            ].map((c, i) => (
+              <Reveal key={c.title} delay={i * 90}>
+                <div className="h-full rounded-xl border border-line bg-paper p-6 sm:p-7 hover:border-clay/50 hover:-translate-y-1 hover:shadow-[0_18px_40px_-20px_rgba(42,29,17,0.3)] transition-all duration-500">
+                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-clay/10 text-clay">
+                    {c.icon}
                   </span>
-                  <ArrowUpRightIcon className="w-4 h-4 text-fawn group-hover:text-clay group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 shrink-0" />
-                </button>
-              ))}
-              <div className="hidden md:block border-t border-line" aria-hidden="true" />
-            </div>
-          </Reveal>
+                  <h3 className="mt-5 font-display font-semibold text-xl text-espresso leading-snug">
+                    {c.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm text-bark leading-relaxed">{c.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
+
+      <Process />
 
       {/* ============ CONTACT ============ */}
       <section id="contact" className="bg-espresso text-cream scroll-mt-24">
@@ -494,7 +516,7 @@ export default function Home({ onNavigate }: HomeProps) {
               <div className="px-5 py-4 flex items-center justify-between gap-4 text-xs text-cream/70 bg-espresso border-t border-cream/10">
                 <span className="flex items-center gap-2">
                   <ScaleIcon className="w-4 h-4 text-blush" />
-                  On the main Kandy Road — easy truck access for loading
+                  On the main Kandy Road, Mawathagama — easy truck access for loading
                 </span>
                 <a
                   href={CONTACT.mapUrl}

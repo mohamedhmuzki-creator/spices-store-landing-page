@@ -43,12 +43,15 @@ export type Product = {
   packing: string;
   season: string;
   image: string;
+  /** Descriptive, keyword-rich alt text for the product photo (SEO + accessibility). */
+  imageAlt: string;
   flagship?: boolean;
 };
 
 export const PRODUCTS: Product[] = [
   {
     id: "cinnamon",
+    imageAlt: "Wholesale Ceylon Cinnamon sticks bulk supplier in Mawathagama Sri Lanka - M.R Traders",
     no: "01",
     name: "Ceylon Cinnamon",
     alt: "Kurundu · True Cinnamon",
@@ -63,6 +66,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "black-pepper",
+    imageAlt: "Bulk wholesale Black Pepper whole peppercorns supplier in Sri Lanka - M.R Traders Mawathagama",
     no: "02",
     name: "Black Pepper",
     alt: "Gammiris · Whole",
@@ -76,6 +80,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "white-pepper",
+    imageAlt: "Wholesale White Pepper whole peppercorns bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "03",
     name: "White Pepper",
     alt: "Whole · Water-retted",
@@ -89,6 +94,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "green-pepper",
+    imageAlt: "Fresh Green Pepper on vine for bulk wholesale in Sri Lanka - M.R Traders Mawathagama",
     no: "04",
     name: "Green Pepper",
     alt: "Fresh vine spikes",
@@ -102,6 +108,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "mixed-peppercorn",
+    imageAlt: "Wholesale Mixed Peppercorns black white green blend bulk spices Sri Lanka - M.R Traders",
     no: "05",
     name: "Mixed Peppercorn",
     alt: "Tri-colour blend",
@@ -115,6 +122,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cardamom",
+    imageAlt: "Wholesale Ceylon Green Cardamom pods bulk spices supplier Sri Lanka - M.R Traders Mawathagama",
     no: "06",
     name: "Cardamom",
     alt: "Enasal · Green",
@@ -128,6 +136,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cloves",
+    imageAlt: "Wholesale Ceylon Cloves whole dried spice bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "07",
     name: "Cloves",
     alt: "Kabu · Whole",
@@ -141,6 +150,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "nutmeg",
+    imageAlt: "Wholesale Ceylon Nutmeg whole seeds bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "08",
     name: "Nutmeg",
     alt: "Sadikka · Whole",
@@ -154,6 +164,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "mace",
+    imageAlt: "Wholesale Ceylon Mace spice from nutmeg fruit bulk supplier Sri Lanka - M.R Traders",
     no: "09",
     name: "Mace",
     alt: "Whole blades",
@@ -167,6 +178,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "goraka",
+    imageAlt: "Wholesale Goraka Garcinia dried fruit bulk spice supplier Sri Lanka - M.R Traders Mawathagama",
     no: "10",
     name: "Goraka",
     alt: "Gambooge · Garcinia",
@@ -179,6 +191,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "coffee",
+    imageAlt: "Wholesale Sri Lankan Coffee beans bulk supplier Mawathagama - M.R Traders",
     no: "11",
     name: "Coffee",
     alt: "Robusta · Parchment",
@@ -192,6 +205,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cashew",
+    imageAlt: "Wholesale Raw Cashew Nuts in shell bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "12",
     name: "Raw Cashew Nuts",
     alt: "Kaju · In-shell",
@@ -204,6 +218,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "copra",
+    imageAlt: "Wholesale Copra dried coconut bulk supplier Kurunegala Sri Lanka - M.R Traders",
     no: "13",
     name: "Copra",
     alt: "Dried coconut kernel",
@@ -217,6 +232,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "arecanut",
+    imageAlt: "Wholesale Arecanut Betel Nut sliced bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "14",
     name: "Arecanut",
     alt: "Puwak · Betel nut",
@@ -230,6 +246,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "paddy",
+    imageAlt: "Wholesale Paddy Rice sacks bulk supplier Mawathagama Sri Lanka - M.R Traders",
     no: "15",
     name: "Paddy",
     alt: "Nel · New season",
@@ -243,6 +260,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "ekel",
+    imageAlt: "Wholesale Coconut Ekel sticks bundles bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "16",
     name: "Ekel",
     alt: "Ekek · Coconut midribs",
@@ -255,6 +273,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "charcoal",
+    imageAlt: "Wholesale Charcoal hardwood lump bulk fuel supplier Sri Lanka - M.R Traders",
     no: "17",
     name: "Charcoal",
     alt: "Hardwood lump",
@@ -268,6 +287,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "rss",
+    imageAlt: "Wholesale Ribbed Smoked Sheet RSS Rubber bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "18",
     name: "RSS — Ribbed Smoked Sheet",
     alt: "Plantation rubber",
@@ -280,6 +300,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "scrap-rubber",
+    imageAlt: "Wholesale Scrap Rubber natural bulk supplier Sri Lanka - M.R Traders Mawathagama",
     no: "19",
     name: "Scrap Rubber",
     alt: "Field scrap · Cup lump",
