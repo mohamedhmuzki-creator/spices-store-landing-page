@@ -6,6 +6,10 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import { applySeo, currentPage, pushPath, type Page } from "./router";
 
+/** The contact "page" is the contact section of the home page. */
+const anchorFor = (page: Page, anchor?: string) =>
+  anchor ?? (page === "contact" ? "contact" : undefined);
+
 export default function App() {
   const [page, setPage] = useState<Page>(() => currentPage());
 
@@ -21,23 +25,25 @@ export default function App() {
     applySeo(page);
   }, [page]);
 
-  /* honour a #anchor present on first load (e.g. /#contact) */
+  /* on direct load of a hashed URL or /contact, jump to the right section */
   useEffect(() => {
-    const id = window.location.hash.slice(1);
+    const id = window.location.hash.slice(1) || (page === "contact" ? "contact" : "");
     if (!id) return;
     window.setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "auto", block: "start" });
     }, 80);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigate = useCallback((next: Page, anchor?: string) => {
+    const target = anchorFor(next, anchor);
     pushPath(next, anchor);
     setPage(next);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.setTimeout(() => {
-      if (anchor) {
+      if (target) {
         document
-          .getElementById(anchor)
+          .getElementById(target)
           ?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
       } else {
         window.scrollTo({ top: 0, behavior: "auto" });
@@ -48,7 +54,9 @@ export default function App() {
   return (
     <div className="noise min-h-screen flex flex-col bg-ivory text-ink">
       <Header page={page} onNavigate={navigate} />
-      <div className="flex-1">{page === "home" ? <Home onNavigate={navigate} /> : <Products />}</div>
+      <div className="flex-1">
+        {page === "products" ? <Products /> : <Home onNavigate={navigate} />}
+      </div>
       <Footer onNavigate={navigate} />
       <WhatsAppFloat />
     </div>

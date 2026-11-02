@@ -63,7 +63,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href={`${pathForPage("home")}#contact`} onClick={handle("home", "contact")} className="hover:text-cream transition-colors">
+                <a href={pathForPage("contact")} onClick={handle("contact")} className="hover:text-cream transition-colors">
                   Contact &amp; Directions
                 </a>
               </li>

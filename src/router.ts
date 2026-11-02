@@ -1,12 +1,15 @@
-export type Page = "home" | "products";
+export type Page = "home" | "products" | "contact";
 
 /** URL path for each page of the site. */
-export const pathForPage = (page: Page) => (page === "products" ? "/products" : "/");
+export const pathForPage = (page: Page) =>
+  page === "products" ? "/products" : page === "contact" ? "/contact" : "/";
 
 /** Work out which page a URL path belongs to. */
 export const pageForPath = (path: string): Page => {
   const clean = path.replace(/index\.html$/i, "").replace(/\/+$/, "").toLowerCase();
-  return clean.endsWith("/products") ? "products" : "home";
+  if (clean.endsWith("/products")) return "products";
+  if (clean.endsWith("/contact")) return "contact";
+  return "home";
 };
 
 /** On-page SEO: title tag + meta description for each URL. */
@@ -20,6 +23,11 @@ export const SEO: Record<Page, { title: string; description: string }> = {
     title: "Wholesale Ceylon Spices & Bulk Products | Mr. Traders",
     description:
       "Browse our full catalog of 19+ wholesale spices and produce at Mr. Traders in Sri Lanka. High-quality bulk Ceylon cinnamon, black pepper, cardamom, and cloves.",
+  },
+  contact: {
+    title: "Contact M.R Traders — Wholesale Spice Buyer & Supplier, Mawathagama",
+    description:
+      "Call or WhatsApp M.R Traders on 078 756 9596. Visit 96, Kandy Road, Mawathagama, Sri Lanka. Open Tuesday–Sunday, 8.00 AM–6.00 PM. We buy from local farmers and supply spices in bulk.",
   },
 };
 

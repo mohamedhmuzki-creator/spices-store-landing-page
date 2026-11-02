@@ -22,6 +22,71 @@
     />
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!--
+      ===== Pre-paint per-route metadata =====
+      This SPA serves ONE html shell for every URL, so the static <title> and meta
+      tags above are always the home page's. This block swaps them for the correct
+      page before first paint — so "view source", link previews and crawlers that
+      read the raw HTML see unique metadata on /products and /contact too.
+      Keep these values in sync with SEO in src/router.ts.
+    -->
+    <script>
+      (function () {
+        var path = (location.pathname || "/").toLowerCase().replace(/\/+$/, "");
+        var page =
+          path.indexOf("/products") > -1
+            ? "products"
+            : path.indexOf("/contact") > -1
+              ? "contact"
+              : "home";
+        if (page === "home") return;
+
+        var SEO = {
+          products: {
+            t: "Wholesale Ceylon Spices & Bulk Products | Mr. Traders",
+            d: "Browse our full catalog of 19+ wholesale spices and produce at Mr. Traders in Sri Lanka. High-quality bulk Ceylon cinnamon, black pepper, cardamom, and cloves.",
+            u: "/products"
+          },
+          contact: {
+            t: "Contact M.R Traders — Wholesale Spice Buyer & Supplier, Mawathagama",
+            d: "Call or WhatsApp M.R Traders on 078 756 9596. Visit 96, Kandy Road, Mawathagama, Sri Lanka. Open Tuesday to Sunday, 8.00 AM to 6.00 PM. We buy from local farmers and supply spices in bulk.",
+            u: "/contact"
+          }
+        };
+        var s = SEO[page];
+        if (!s) return;
+
+        document.title = s.t;
+
+        function set(sel, attr, value, create) {
+          var el = document.head.querySelector(sel);
+          if (!el && create) {
+            el = create();
+            document.head.appendChild(el);
+          }
+          if (el) el.setAttribute(attr, value);
+        }
+
+        set('meta[name="description"]', "content", s.d);
+        set('meta[property="og:title"]', "content", s.t);
+        set('meta[property="og:description"]', "content", s.d);
+        set('meta[name="twitter:title"]', "content", s.t);
+        set('meta[name="twitter:description"]', "content", s.d);
+
+        var url = location.origin + s.u;
+        set('link[rel="canonical"]', "href", url, function () {
+          var l = document.createElement("link");
+          l.rel = "canonical";
+          return l;
+        });
+        set('meta[property="og:url"]', "content", url, function () {
+          var m = document.createElement("meta");
+          m.setAttribute("property", "og:url");
+          return m;
+        });
+      })();
+    </script>
+
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2320150c'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' font-weight='700' fill='%23e9b98a' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E"

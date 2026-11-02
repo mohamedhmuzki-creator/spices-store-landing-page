@@ -103,9 +103,10 @@ export default function Header({ page, onNavigate }: HeaderProps) {
               Products
             </a>
             <a
-              href={href("home", "contact")}
-              onClick={handle("home", "contact")}
-              className="navlink text-sm font-semibold tracking-wide text-ink hover:text-clay"
+              href={href("contact")}
+              onClick={handle("contact")}
+              aria-current={page === "contact" ? "page" : undefined}
+              className={linkClass(page === "contact")}
             >
               Contact
             </a>
@@ -152,9 +153,9 @@ export default function Header({ page, onNavigate }: HeaderProps) {
                 Products
               </a>
               <a
-                href={href("home", "contact")}
-                onClick={handle("home", "contact")}
-                className="text-left py-2.5 font-display text-xl text-ink"
+                href={href("contact")}
+                onClick={handle("contact")}
+                className={`text-left py-2.5 font-display text-xl ${page === "contact" ? "text-clay" : "text-ink"}`}
               >
                 Contact
               </a>
