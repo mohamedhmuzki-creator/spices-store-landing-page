@@ -10,8 +10,13 @@ import { applySeo, currentPage, pushPath, type Page } from "./router";
 const anchorFor = (page: Page, anchor?: string) =>
   anchor ?? (page === "contact" ? "contact" : undefined);
 
-export default function App() {
-  const [page, setPage] = useState<Page>(() => currentPage());
+type AppProps = {
+  /** Used by the build-time pre-renderer (src/ssg-entry.tsx); the browser uses the URL. */
+  initialPage?: Page;
+};
+
+export default function App({ initialPage }: AppProps) {
+  const [page, setPage] = useState<Page>(() => initialPage ?? currentPage());
 
   /* keep the browser back / forward buttons working */
   useEffect(() => {
